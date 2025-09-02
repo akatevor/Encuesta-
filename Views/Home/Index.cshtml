@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Bienvenido";
+}
+
+<div class="bienvenida-container">
+    <h1>Bienvenido</h1>
+
+    <div class="botones">
+        <a asp-controller="Login" asp-action="Login"><button type="button">Iniciar Sesión</button></a>
+        <a asp-controller="Registro" asp-action="Index"><button type="button">Registrarse</button></a>
+      
+
+    </div>
+</div>
+
+<style>
+    .bienvenida-container {
+        text-align: center;
+        margin-top: 100px;
+    }
+
+    h1 {
+        font-size: 36px;
+        margin-bottom: 40px;
+    }
+
+    .botones button {
+        padding: 15px 30px;
+        font-size: 16px;
+        margin: 0 10px;
+        cursor: pointer;
+    }
+</style>

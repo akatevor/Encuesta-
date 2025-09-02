@@ -1,0 +1,56 @@
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="text-center">Iniciar Sesión</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        @if (!string.IsNullOrEmpty(ViewBag.Error))
+                        {
+                            <div class="alert alert-danger">@ViewBag.Error</div>
+                        }
+
+                        <div class="form-group mb-3">
+                            <label>Usuario</label>
+                            <input type="text" name="username" class="form-control" required placeholder="Ingresa tu usuario">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Contraseña</label>
+                            <input type="password" name="password" class="form-control" required placeholder="Ingresa tu contraseña">
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+    
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+    }
+</style>

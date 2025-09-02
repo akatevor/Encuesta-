@@ -1,0 +1,118 @@
+@{
+    string username = ViewBag.Username ?? "Usuario";
+    ViewData["Title"] = $"Encuesta - {username}";
+    bool readonlyMode = ViewBag.ReadOnly ?? false;
+    string[] respuestas = ViewBag.Respuestas as string[] ?? new string[10];
+
+    string[] preguntas = new string[] {
+        "1. ¿Con qué frecuencia utilizas tu celular entre clases?",
+        "2. ¿Con qué frecuencia platicas con tus compañeros en los pasillos o áreas comunes?",
+        "3. ¿Con qué frecuencia estudias o repasas apuntes en los descansos?",
+        "4. ¿Con qué frecuencia visitas la biblioteca entre clases?",
+        "5. ¿Con qué frecuencia consumes alimentos o bebidas en la cafetería o pasillos?",
+        "6. ¿Con qué frecuencia realizas actividades deportivas o físicas en los descansos?",
+        "7. ¿Con qué frecuencia escuchas música o ves videos en tu tiempo libre entre clases?",
+        "8. ¿Con qué frecuencia participas en actividades de clubes, grupos o asociaciones estudiantiles?",
+        "9. ¿Con qué frecuencia realizas tareas o trabajos pendientes entre clases?",
+        "10. ¿Con qué frecuencia prefieres descansar o no hacer nada en los intervalos?"
+    };
+
+    string[] opciones = new string[] { "NUNCA", "AVECES", "REGULARMENTE", "SIEMPRE" };
+}
+
+<div class="contenedor">
+    <h1>Bienvenido, @username!</h1>
+    <h2>Conteste las siguientes preguntas</h2>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+    {
+        <div class="alert alert-info">@ViewBag.Mensaje</div>
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    <form method="post">
+        @for (int i = 0; i < preguntas.Length; i++)
+        {
+            <div class="form-group">
+                <label>@preguntas[i]</label>
+                <select name="respuestas[@i]" class="form-control" @(readonlyMode ? "disabled" : "") required>
+                    <option value="">Seleccione una opción</option>
+                    @foreach (var opcion in opciones)
+                    {
+                        bool selected = respuestas[i] == opcion;
+                        <option value="@opcion" selected="@selected">@opcion</option>
+                    }
+                </select>
+            </div>
+        }
+
+        @if (!readonlyMode)
+        {
+            <button type="submit" class="btn btn-primary">Enviar Encuesta</button>
+            <button type="reset" class="btn btn-secondary">Reiniciar</button>
+        }
+        else
+        {
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Volver al Inicio</a>
+        }
+    </form>
+</div>
+
+<style>
+    .contenedor {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        margin-right: 10px;
+        font-size: 16px;
+    }
+
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+
+    .alert-info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>

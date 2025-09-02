@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "Encuesta Completada";
+    string username = ViewBag.Username ?? "Usuario";
+}
+
+<div class="container text-center mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h2>¡Encuesta Completada!</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle fa-5x text-success"></i>
+                    </div>
+                    <h3>Gracias, @username</h3>
+                    <p class="lead">Tu encuesta ha sido guardada exitosamente.</p>
+                    <p>Agradecemos tu tiempo y participación.</p>
+                    
+                    <div class="mt-4">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">
+                            <i class="fas fa-home"></i> Volver al Inicio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border: none;
+        border-radius: 10px;
+    }
+    
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+</style>

@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Debug Encuesta";
+}
+
+<h2>Debug Información de Encuesta</h2>
+
+<p><strong>User ID:</strong> @ViewBag.UserId</p>
+<p><strong>Encuesta Completada:</strong> @ViewBag.EncuestaCompletada</p>
+
+@if (ViewBag.EncuestaCompletada)
+{
+    <h3>Respuestas Guardadas:</h3>
+    <ul>
+        @for (int i = 0; i < 10; i++)
+        {
+            <li>Pregunta @(i + 1): @ViewBag.Respuestas[i]</li>
+        }
+    </ul>
+}
+else
+{
+    <p>El usuario no ha completado la encuesta aún.</p>
+}
+
+<a href="@Url.Action("Encuesta", "Encuesta")" class="btn btn-primary">Volver a Encuesta</a>

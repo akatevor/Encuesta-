@@ -1,0 +1,77 @@
+@model List<Admin.Models.EncuestaModelo>
+
+@{
+    ViewData["Title"] = "Gestión de Encuestas";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Encuestas Recopiladas</h2>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-success">@ViewBag.Mensaje</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No hay encuestas registradas aún.</div>
+    }
+    else
+    {
+        <form method="post" asp-action="EliminarEncuesta" id="formEliminar">
+            <input type="hidden" name="encuestaId" id="idEncuestaSeleccionada" />
+
+            <table class="table table-bordered table-striped" id="tablaEncuestas">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        @for (int i = 0; i < 10; i++)
+                        {
+                            <th>Pregunta @i</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var encuesta in Model)
+                    {
+                        <tr data-id="@encuesta.Id">
+                            <td>@encuesta.Id</td>
+                            <td>@encuesta.UserName</td>
+                            @for (int i = 0; i < encuesta.Respuestas.Length; i++)
+                            {
+                                <td>@encuesta.Respuestas[i]</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-danger mt-3" id="btnEliminar" disabled>
+                Eliminar Encuesta Seleccionada
+            </button>
+        </form>
+    }
+</div>
+
+<style>
+    table th, table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    tr.selected {
+        background-color: #f8d7da !important; /* resalta la fila seleccionada */
+    }
+</style>
+
+<script>
+    const tabla = document.getElementById('tablaEncuestas');
+    const inputId = document.getElementById('idEncuestaSeleccionada');
+    const btnEliminar = document.getElementById('btnEliminar');
+    let f
