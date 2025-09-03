@@ -11,7 +11,7 @@ namespace Encuesta.Data
 
         public ConexionMySql()
         {
-            connectionString = "Server=localhost;Database=encuestaBD;User ID=root;Password=123qwe;Port=3306;SslMode=Preferred;";
+            connectionString = "Server=localhost;Database=encuestaBD;User ID=root;Password=pepe;Port=3306;SslMode=Preferred;";
         }
 
         public MySqlConnection GetConnection()
